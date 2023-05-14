@@ -146,7 +146,7 @@ function filterContent(my_object) {
 		filteredEvents = filteredEvents.filter( evento => evento.name.toLowerCase().includes(searchWord))
 	}
 
-	// Rettornar objeto
+	// Retornar objeto
 	let filteredContent = {
 		currentDate: my_object.currentTarget.myParam.currentDate,
 		events: filteredEvents
@@ -161,9 +161,9 @@ function filterByDate(myObject) {
 
 	let currentURL = window.location.href
 	let eventsFilteredByDate = myObject.events
-	if( currentURL.includes("upcoming")){
+	if( currentURL.includes("Upcoming")){
 		eventsFilteredByDate = myObject.events.filter( e => e.date >= myObject.currentDate)
-	} else if (currentURL.includes("past")){
+	} else if (currentURL.includes("Past")){
 		eventsFilteredByDate = myObject.events.filter( e => e.date < myObject.currentDate)
 	}
 

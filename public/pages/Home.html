@@ -244,11 +244,27 @@
     <!-- Función para generar las tarjetas -->
     <script src="../js/home.js"></script>
 
-    
-<!-- SCRIPTS PARA ENLAZAR CON FIREBASE -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script const firebaseConfig = {
-    ></script>
+
+    <!-- SCRIPTS PARA ENLAZAR CON FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script>
+
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCm37qyhqYP4DNNXjfZqTKkvT7qG00H_E8",
+  authDomain: "amazing-events-b1b62.firebaseapp.com",
+  projectId: "amazing-events-b1b62",
+  storageBucket: "amazing-events-b1b62.appspot.com",
+  messagingSenderId: "665356180505",
+  appId: "1:665356180505:web:302fd9a2c4e620950f1e88",
+  measurementId: "G-B1FJLRWVLZ"
+};
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore()
+    </script>
 </body>
+
 </html>
