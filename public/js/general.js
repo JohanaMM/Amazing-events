@@ -41,7 +41,11 @@ let localData = "./json/amazing_1.json";
 
 // Ir a detalles
 function viewDetails(cardId) {
-	window.location.href = `./Details.html?id=${cardId}`
+	window.location.href = `pages/Details.html?id=${cardId}`
+}
+
+function viewDetails2(cardId) {
+	window.location.href = `Details.html?id=${cardId}`
 }
 
 // Estilo arreglos
@@ -114,6 +118,46 @@ function generateCards(myObj, categoriesArray){
 		myObj.events.forEach((event) => {
 			let colorStyle = colorStyles[categoriesArray.indexOf(event.category) % colorStyles.length]
 			cardsHTML += generateCard(event, myObj.currentDate, colorStyle, withColors)
+		})
+	} else {
+		cardsHTML += `<div class="d-flex flex-column"> <p class="text-center" style="color:white;font-size:3rem;">Oops, no coincidences!</p><p class="text-center" style="color:white;font-size:2rem;">Try adjusting your search parameters</p></div>`
+	}
+	return cardsHTML + `</div>`
+}
+
+function generateCard2(evento, refDate, cardClassColor, withColour){
+
+	return `<div class="mb-4 d-flex justify-content-center" onclick="viewDetails2(${evento._id})">
+	<div class="card ${withColour ? "card-".concat(cardClassColor) : ""} h-100">
+		<img src="${evento.image}" class="card-img-top" alt="${evento.name} image">
+		<div class="card-body">
+		<h5 class="card-title text-center">${evento.name}</h5>
+		<div class="d-flex mb-0 justify-content-evenly">
+			<p class="card-price d-inline mb-0"><small>${evento.date}</small></p>
+			<p class="card-price d-inline mb-0"><strong>$${evento.price}</strong></p>
+		</div>
+		<hr class="mb-2 mt-2">
+			<p class="card-text mb-2">${evento.description}</p>
+		</div>
+		<div class="card-footer">
+		<btn onclick="viewDetails2(${evento._id})" class=${refDate >= evento.date ? '"btn btn-outline-secondary"':'"btn btn-outline-info"'} >View Details</btn>
+		</div>
+	</div>
+</div>
+`
+}
+
+
+// todas las cards
+function generateCards2(myObj, categoriesArray){
+
+	let cardsHTML = `<div class="d-flex flex-wrap my-5 justify-content-around">`
+	let withColors = JSON.parse(sessionStorage.getItem("colors")) === true;																																								
+
+	if (myObj.events.length != 0){
+		myObj.events.forEach((event) => {
+			let colorStyle = colorStyles[categoriesArray.indexOf(event.category) % colorStyles.length]
+			cardsHTML += generateCard2(event, myObj.currentDate, colorStyle, withColors)
 		})
 	} else {
 		cardsHTML += `<div class="d-flex flex-column"> <p class="text-center" style="color:white;font-size:3rem;">Oops, no coincidences!</p><p class="text-center" style="color:white;font-size:2rem;">Try adjusting your search parameters</p></div>`

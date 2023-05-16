@@ -79,7 +79,14 @@ border-color: #c11f6d !important;
 
 }
 
-
+.btn-danger{
+	background-color: #0dcaf0;
+	border: #151515;
+	color: #151515;
+}
+.btn-danger:hover{
+	background-color: #0dcaf0;
+}
 
 /* BANNER GIGANTE QUE SE PARECE A UN CARROUSEL */
 #giant-banner {
@@ -112,11 +119,15 @@ border-color: #c11f6d !important;
 	color: #c11f6d;
 }
 
-@media (max-width: 376px){
+@media (max-width: 769px){
 	.giant-banner-small {
-		font-size: 2rem !important;
+		font-size: rem !important;
 		text-align: center;
 	}
+	#giant-banner h2 {
+		font-size: 36PX;
+	}	
+
 }
 
 .carrousel-button:hover {
@@ -668,3 +679,4 @@ table.blueTable thead th:first-child {
 			justify-content: space-around!important;
 	}
 }
+

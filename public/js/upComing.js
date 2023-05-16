@@ -12,7 +12,7 @@ let asyncFuture = async function(){
 	
 			let allCategoriesArray = [...categorySetGenerator2(apiEvents)]
 
-		div_tarjetas.innerHTML = generateCards(filterByDate(apiEvents), allCategoriesArray);
+		div_tarjetas.innerHTML = generateCards2(filterByDate(apiEvents), allCategoriesArray);
         div_checkboxes.innerHTML = checkBoxGenerator(allCategoriesArray);												//First (and unique) time rendering checkboxes
 
 		const inputSearch = document.getElementById("search")
