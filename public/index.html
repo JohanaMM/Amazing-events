@@ -5,49 +5,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link
-        href="https: //fonts.googleapis.com/css2? familia = Roboto: ital, wght @ 0,100; 0,300; 0,400; 0,500; 0,700; 0,900; 1,100; 1,300; 1,400; 1,500; 1,700; 1,900 & display = swap "
-        rel=" stylesheet ">
-
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
     <!-- Sweet Alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- meta tags-->
-    <meta name="keywords" content="events">
-    <meta name="description" content="Amazing events">
+    <meta name="keywords" content="eccommercer">
+    <meta name="description" content="daba store">
 
     <!-- css main-->
     <link rel="stylesheet" href="./css/style.css">
 
+    <!-- MercadoPago.js -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+
     <!-- favicon-->
-    <link rel="shortcut icon" href="./img/FAVICON.png" alt="logo pagina" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/Favicon.svg" alt="logo pagina" type="image/x-icon">
 
     <!-- title-->
-    <title>Amazing Events | AEVENTS</title>
+    <title>Daba store</title>
 </head>
 
-<body x-data="alertComponent()" x-init="$watch('openAlertBox', value => {
-      if(value){
-        setTimeout(function () {
-          openAlertBox = false
-        }, 2000)
-      }
-    })" class="relative">
+<body id="body">
     <!-- CABECERA - POSEE LOS BOTONES DE NAVEGACION -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand ms-5" href="./index.html">
-                <img src="./img/Logo Amazing Events.png" alt="Amazing Events Logo" width="120" height="36">
+            <a class="navbar-brand" href="./index.html">
+                <img src="./img/Logo.png" alt="Daba Store Logo">
             </a>
             <!-- Responsive -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -58,23 +49,25 @@
             <!-- Secciones -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav justify-content-around ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link btn-j px-3 py-1" aria-current="page" role="button"
-                            href="./index.html">Home</a>
+                    <li id="Home" class="nav-item">
+                        <a class="nav-link btn-j px-3 py-1" aria-current="page" role="button" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn-j px-3 py-1" aria-current="page"
-                            href="./pages/UpcomingEvents.html">Upcoming Events</a>
+                        <a id="Producto" class="nav-link btn-j px-3 py-1" aria-current="page" href="#">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn-j px-3 py-1" aria-current="page" href="./pages/PastEvents.html">Past
-                            Events</a>
+                        <a id="Ofertas" class="nav-link btn-j px-3 py-1" aria-current="page" href="#">Ofertas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn-j px-3 py-1" aria-current="page" href="./pages/Contact.html">Contact</a>
+                        <a id="Novedades" class="nav-link btn-j px-3 py-1" aria-current="page" href="#">Novedades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn-j px-3 py-1" aria-current="page" href="./pages/Stats.html">Stats</a>
+                        <a id="Contacto" class="nav-link btn-j px-3 py-1" aria-current="page" href="#">Contacto</a>
+                    </li>
+                    <li class="nav-item container-icon"><a id="Compras" class="nav-link btn-j px-3 py-1"
+                            aria-current="page">🛒</a>
+                        <!-- <div class="count-products" id="contador-productos">0
+                        </div> -->
                     </li>
                 </ul>
             </div>
@@ -83,124 +76,50 @@
 
     <main>
         <!-- BANNER -->
-        <div id="giant-banner" class="container-fluid d-flex justify-content-between align-items-center">
-            <div class="d-flex">
-                <a href="./pages/Stats.html" class="carrousel-button">&lt;</a>
+        <section class="imagenCarrusel" id="carruselInicio">
+            <div class="marquee">
+                <div class="slide">
+                    <a href="#"><img src="./img/banner home 1.jpg" alt=""></a>
+                    <a href="#"><img src="./img/banner home 2.jpg" alt=""></a>
+                    <a href="#"><img src="./img/banner home 3.jpg" alt=""></a>
+                    <a href="#"><img src="./img/banner home 1.jpg" alt=""></a>
+                    <a href="#"><img src="./img/banner home 3.jpg" alt=""></a>
+                </div>
+                <div class="slide">
+                    <a href="#"><img src="./img/banner home 1.jpg" alt=""></a>
+                    <a href="#"><img src="./img/banner home 2.jpg" alt=""></a>
+                    <a href="#"><img src="./img/banner home 3.jpg" alt=""></a>
+                    <a href="#"><img src="./img/banner home 1.jpg" alt=""></a>
+                    <a href="#"><img src="./img/banner home 3.jpg" alt=""></a>
+                </div>
+        </section>
+        <section class="search" id="search">
+            <div class="container" id="categorias">
+                <label><input type="checkbox" value="Samnsung"> Samnsung</label>
+                <label><input type="checkbox" value="Xiaomi"> Xiaomi</label>
+                <label><input type="checkbox" value="Iphone"> Iphone</label>
+                <label><input type="checkbox" value="ZTE"> ZTE</label>
+                <label><input type="checkbox" value="Motorola"> Motorola</label>
+                <label><input type="checkbox" value="Ofertas"> Ofertas</label>
+                <label><input type="checkbox" value="Novedades"> Novedades</label>
             </div>
-            <h2> HOME</h2>
-            <div class="d-flex">
-                <a href="./pages/UpcomingEvents.html" class="carrousel-button">></a>
-            </div>
-        </div>
-
-
-        <!-- Buscador -->
-        <div class="container mt-3 p-1" id="div-formulario">
-            <form class="d-xl-flex flex-wrap justify-content-lg-around justify-content-md-around">
-
-                <div class="d-inline-block categories" id="checkboxes">
-                    <!-- CHECKBOXES PARA APLICAR FILTROS POR CATEGORÍA -->
-                    <div class="container d-sm-flex my-1 gap-2">
-                        <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="a">
-                            <label class="form-check-label" for="a">Category</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="b">
-                            <label class="form-check-label" for="b">Category</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="c">
-                            <label class="form-check-label" for="c">Category</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="d">
-                            <label class="form-check-label" for="d">Category</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="e">
-                            <label class="form-check-label" for="e">Category</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Buscador -->
-                <div class="d-flex div-search">
-                    <input class="form-control search-input" id="search" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <button type="submit" class="btn btn px-2" id="lupita"><i class="fa fa-search fa-lg"></i></button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Cards -->
-        <div class="container-fluid" id="cartas">
-            <div class="row mt-5 justify-content-around mb-5">
-                <div class="col-xxl-3 col-md-6 col-sm-10 mb-4 d-flex justify-content-center">
-                    <div class="card h-100">
-                        <img src="./img/Cine7.jpg" class="card-img-top" alt="foto de personas en cine">
-                        <div class="card-body">
-                            <h5 class="card-title">Cinema</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This card has even longer content than the first to show that equal
-                                height action.</p>
-                            <p class="card-price ms-2"><small>Price: $1800</small></p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="./pages/Details.html" class="btn btn-outline-info">View Details</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xxl-3 col-md-6 col-sm-10 mb-4 d-flex justify-content-center">
-                    <div class="card h-100">
-                        <img src="./img/Feria de comidas7.jpg" class="card-img-top" alt="feria de comidas">
-                        <div class="card-body">
-                            <h5 class="card-title">Food Fair</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This card has even longer content than the first to show that equal
-                                height action.</p>
-                            <p class="card-price ms-2"><small>Price: $2560</small></p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="./pages/Details.html" class="btn btn-outline-info">View Details</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xxl-3 col-md-6 col-sm-10 mb-4 d-flex justify-content-center">
-                    <div class="card h-100">
-                        <img src="./img/Concierto de musica1.jpg" class="card-img-top" alt="concierto musical">
-                        <div class="card-body">
-                            <h5 class="card-title">Music Concert</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This card has even longer content than the first to show that equal
-                                height action.</p>
-                            <p class="card-price ms-2"><small>Price: $3850</small></p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="./pages/Details.html" class="btn btn-outline-info">View Details</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xxl-3 col-md-6 col-sm-10 mb-4 d-flex justify-content-center">
-                    <div class="card h-100">
-                        <img src="./img/Salida al museo5.jpg" class="card-img-top" alt="salida a museo">
-                        <div class="card-body">
-                            <h5 class="card-title">Museum Tour</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This card has even longer content than the first to show that equal
-                                height action.</p>
-                            <p class="card-price ms-2"><small>Price: $5500</small></p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="./pages/Details.html" class="btn btn-outline-info">View Details</a>
-                        </div>
-                    </div>
+            <div class="busqueda">
+                <div class="formDos" id="Search">
+                    <input type="search" id="inputSearch" placeholder="🔍 Busca tu celular">
                 </div>
             </div>
-        </div>
+        </section>
+        </section>
+        <section id="form"></section>
+        <section>
+            <div class="container_card" id="cartas">
+                <p class="cargando">Loading...</p>
+            </div>
+        </section>
+        <section id="carritoCompras"></section>
+        <section class="bloque seis detallesVista" id="seis">
+            <div class="ditailsContainer" id="containerDetalles"></div>
+        </section>
     </main>
 
     <!-- FOOTER -->
@@ -208,76 +127,51 @@
         <div class="d-flex">
             <ul id="ul_iconos" class="d-flex justify-content-center list-unstyled mt-1 mb-0">
                 <li>
-                        <a class="btn btn-outline-danger btn-floating rounded-circle mx-1 mx-lg-3" href="#" role="button">
+                    <a class="btn btn-outline-danger btn-floating rounded-circle mx-1 mx-lg-3" href="#" role="button">
                         <i class="fab fa-instagram"></i>
-                        </a>
+                    </a>
                 </li>
                 <li>
-                        <a class="btn btn-outline-danger btn-floating rounded-circle mx-1 mx-lg-3" href="#" role="button">
+                    <a class="btn btn-outline-danger btn-floating rounded-circle mx-1 mx-lg-3" href="#" role="button">
                         <i class="fab fa-facebook-square"></i>
-                        </a>
+                    </a>
                 </li>
                 <li>
-                        <a class="btn btn-outline-danger btn-floating rounded-circle mx-1 mx-lg-3" href="#" role="button">
+                    <a class="btn btn-outline-danger btn-floating rounded-circle mx-1 mx-lg-3" href="#" role="button">
                         <i class="fab fa-whatsapp"></i>
-                        </a>
+                    </a>
                 </li>
             </ul>
         </div>
 
         <div class="d-flex" id="div-msg">
-            <span id="cohort-msg" class="text-muted">MindHub 2023</span>
+            <span id="cohort-msg" class="text-muted">UTN Tecnicatura en programación Cohorte 2022</span>
         </div>
 
-</footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const loadEl = document.querySelector('#load');
-            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-            // // The Firebase SDK is initialized and available here!
-            //
-            // firebase.auth().onAuthStateChanged(user => { });
-            // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-            // firebase.firestore().doc('/foo/bar').get().then(() => { });
-            // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-            // firebase.messaging().requestPermission().then(() => { });
-            // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-            // firebase.analytics(); // call to activate
-            // firebase.analytics().logEvent('tutorial_completed');
-            // firebase.performance(); // call to activate
-            //
-            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+    </footer>
 
-            try {
-                let app = firebase.app();
-                let features = [
-                    'auth',
-                    'database',
-                    'firestore',
-                    'functions',
-                    'messaging',
-                    'storage',
-                    'analytics',
-                    'remoteConfig',
-                    'performance',
-                ].filter(feature => typeof app[feature] === 'function');
-                loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-            } catch (e) {
-                console.error(e);
-                loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-            }
-        });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
 
-    <!-- Modelo de datos para las tarjetas -->
-    <script src="./js/data.js"></script>
-    <!-- Archivo para colocar funciones comunes -->
-    <script src="./js/general.js"></script>
-    <!-- Función para generar las tarjetas -->
-    <script src="./js/home.js"></script>
+
+    <script src="./js/Index.js"></script>
+
+    <script>
+        window.onload = function () {
+            getData();
+            checkboxListener();
+
+            inputSearch.addEventListener("input", function (event) {
+                search = event.target.value.trim().toLowerCase();
+                filtrosCombinados();
+            });
+        };
+    </script>
+
+
+
+
 </body>
 
 </html>
